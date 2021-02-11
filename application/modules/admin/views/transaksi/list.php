@@ -33,7 +33,7 @@
 			</tbody>
 		</table>
 		<?php if (!empty($pelanggan)): ?>
-			<form action="" method="post">
+			<form action="<?= base_url('admin/transaksi/save') ?>" method="post">
 				<div class="form-group">
 					<label for="pelanggan">Pelanggan</label>
 					<?= form_dropdown([

@@ -98,24 +98,18 @@ class Transaksi extends CI_Controller
 				<?php
 			}
 		}
+		$this->pelanggan = [];
 		if(!empty($this->order))
 		{
-			if(!empty($this->my_session['pelanggan']))
+			$this->pelanggan[''] = 'Pilih pelanggan';
+			$pelanggan_tmp = $this->db->get('pelanggan')->result_array();
+			if(!empty($pelanggan_tmp))
 			{
-				$this->pelanggan = $this->my_session['pelanggan'];
-			}else{
-				$this->pelanggan = [];
-				$this->pelanggan[''] = 'Pilih pelanggan';
-				$pelanggan_tmp = $this->db->get('pelanggan')->result_array();
-				if(!empty($pelanggan_tmp))
-				{
-					foreach ($pelanggan_tmp as $key => $value) {
-						$this->pelanggan[$value['id']] = $value['nama'];
-					}
+				foreach ($pelanggan_tmp as $key => $value) {
+					$this->pelanggan[$value['id']] = $value['nama'];
 				}
-				$this->my_session['pelanggan'] = $this->pelanggan;
-				$this->my_session['produk_tmp'] = $this->produk_tmp;
 			}
+			$this->my_session['produk_tmp'] = $this->produk_tmp;
 		}
 		$this->my_session['transaksi'] = [];
 		$this->my_session['transaksi']['last_id'] = $this->last_id;
@@ -127,5 +121,32 @@ class Transaksi extends CI_Controller
 	{
 		$this->form();
 		$this->load->view('transaksi/index',['last_id'=>$this->last_id,'session'=>$this->my_session,'produk'=>$this->produk,'order'=>$this->order,'pelanggan'=>$this->pelanggan]);
+	}
+	public function save()
+	{
+		$transaksi = $this->input->post();
+		$user = $this->session->userdata(base_url('_logged_in'));
+		$post_transaksi = $user['transaksi'];
+		$post_order = $user['order'];
+		$transaksi['kode'] = $post_transaksi['kode'];
+		$transaksi['user_id'] = $user['id'];
+		$transaksi['total'] = 0;
+		foreach ($post_order as $key => $value) {
+			$transaksi['total'] += @intval($value['total']);
+		}
+		if($this->db->insert('produk_transaksi',$transaksi))
+		{
+			$last_id = $this->db->insert_id();
+			$transaksi_detail = [];
+			foreach ($post_order as $key => $value) {
+				$transaksi_detail[$key] = $value;
+				$transaksi_detail[$key]['transaksi_id'] = $last_id;
+			}
+			if($this->db->insert_batch('transaksi_detail',$transaksi_detail))
+			{
+				$this->reset();
+				redirect('admin/transaksi');
+			}
+		}
 	}
 }

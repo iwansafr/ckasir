@@ -11,6 +11,7 @@ $kategori_list->addInput('alamat','plaintext');
 
 $kategori_list->setEdit(true);
 $kategori_list->setDelete(true);
+$kategori_list->setEditLink('suplier/edit?id=','id');
 $kategori_list->setUrl('admin/suplier/clear_list');
 
 $kategori_list->form();

@@ -10,6 +10,7 @@ $kategori_list->addInput('keterangan','plaintext');
 
 $kategori_list->setEdit(true);
 $kategori_list->setDelete(true);
+$kategori_list->setEditLink('kategori/edit?id=','id');
 $kategori_list->setUrl('admin/kategori/clear_list');
 
 $kategori_list->form();

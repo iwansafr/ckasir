@@ -24,7 +24,3 @@
 		</div>
 	</form>
 </div>
-<?php
-pr($session);
-
-?>

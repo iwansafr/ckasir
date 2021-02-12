@@ -11,6 +11,7 @@ class Transaksi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->db->cache_off();
 		$this->load->model('esg_model');
 		$this->load->model('admin_model');
 		// $this->load->model('admin_menu_model');
@@ -43,10 +44,10 @@ class Transaksi extends CI_Controller
 		if(!empty($this->my_session['transaksi']['last_id'])){
 			$this->last_id = $this->my_session['transaksi']['last_id'];
 		}else{
-			$this->last_id = $this->db->query('SELECT kode FROM produk_transaksi WHERE DATE(created) = CURDATE() ORDER BY id DESC limit 1')->row_array();
+			$this->last_id = $this->db->query('SELECT * FROM produk_transaksi WHERE DATE(created) = CURDATE() ORDER BY id DESC limit 1')->row_array();
 			if(!empty($this->last_id)){
 				$this->last_id = $this->last_id['kode'];
-				$this->last_id = substr($this->last_id,13,14);
+				// $this->last_id = substr($this->last_id,13,14);
 				$last_id_tmp = explode('-',$this->last_id);
 				$this->last_id = $last_id_tmp[3];
 				$this->last_id = $this->last_id+1;
@@ -131,9 +132,14 @@ class Transaksi extends CI_Controller
 		$transaksi['kode'] = $post_transaksi['kode'];
 		$transaksi['user_id'] = $user['id'];
 		$transaksi['total'] = 0;
+		$update_stock = [];
+		// pr($user['produk_tmp']);
 		foreach ($post_order as $key => $value) {
 			$transaksi['total'] += @intval($value['total']);
+			$update_stock[$key]['id'] = $value['produk_id'];
+			$update_stock[$key]['stock'] = intval($user['produk_tmp'][$key]['stock'])-intval($value['qty']);
 		}
+		// pr($update_stock);
 		if($this->db->insert('produk_transaksi',$transaksi))
 		{
 			$last_id = $this->db->insert_id();
@@ -142,10 +148,9 @@ class Transaksi extends CI_Controller
 				$transaksi_detail[$key] = $value;
 				$transaksi_detail[$key]['transaksi_id'] = $last_id;
 			}
-			if($this->db->insert_batch('transaksi_detail',$transaksi_detail))
+			if($this->db->insert_batch('transaksi_detail',$transaksi_detail) && $this->db->update_batch('produk',$update_stock,'id'))
 			{
 				$this->reset();
-				redirect('admin/transaksi');
 			}
 		}
 	}

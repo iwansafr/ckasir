@@ -6,7 +6,9 @@ $kategori_list->setNumbering(true);
 $kategori_list->addInput('id','hidden');
 $kategori_list->setTable('pelanggan');
 $kategori_list->addInput('nama','plaintext');
-$kategori_list->addInput('jk','plaintext');
+$kategori_list->addInput('jk','dropdown');
+$kategori_list->setOptions('jk',['1'=>'Laki-laki','2'=>'Perempuan']);
+$kategori_list->setAttribute('jk','disabled');
 $kategori_list->addInput('hp','plaintext');
 $kategori_list->addInput('alamat','plaintext');
 

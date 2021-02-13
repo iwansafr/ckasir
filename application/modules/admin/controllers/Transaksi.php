@@ -17,6 +17,7 @@ class Transaksi extends CI_Controller
 		// $this->load->model('admin_menu_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
+		$this->load->model('transaksi_model');
 		$this->esg_model->init();
 	}
 	public function index()
@@ -153,5 +154,21 @@ class Transaksi extends CI_Controller
 				$this->reset();
 			}
 		}
+	}
+
+	private function report_data()
+	{
+		$tgl = $this->input->get('tgl');
+		return $this->transaksi_model->report_day($tgl);
+	}
+	public function report()
+	{
+		$data = $this->report_data();
+		$this->load->view('index',['data'=>$data]);
+	}
+	public function transaksi_report()
+	{
+		$data = $this->report_data();
+		$this->load->view('transaksi/report_view',['data'=>$data,'print'=>true]);
 	}
 }

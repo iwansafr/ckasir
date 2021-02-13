@@ -1,0 +1,51 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+
+DROP TABLE IF EXISTS `produk_transaksi`;
+CREATE TABLE `produk_transaksi` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `pelanggan_id` int NOT NULL,
+  `kode` varchar(20) NOT NULL,
+  `total` int NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `transaksi_detail`;
+CREATE TABLE `transaksi_detail` (
+  `id` int NOT NULL,
+  `transaksi_id` int NOT NULL,
+  `produk_id` int NOT NULL,
+  `nama` varchar(255) NOT NULL COMMENT 'nama produk',
+  `qty` int NOT NULL,
+  `harga` int NOT NULL,
+  `total` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `produk_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode` (`kode`);
+
+ALTER TABLE `transaksi_detail`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `produk_transaksi`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `transaksi_detail`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

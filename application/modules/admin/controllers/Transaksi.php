@@ -8,6 +8,7 @@ class Transaksi extends CI_Controller
 	var $produk_tmp;
 	var $order;
 	var $pelaggan;
+	var $msg;
 	public function __construct()
 	{
 		parent::__construct();
@@ -23,7 +24,7 @@ class Transaksi extends CI_Controller
 	public function index()
 	{
 		$this->form();
-		$this->load->view('index',['last_id'=>$this->last_id,'session'=>$this->my_session,'produk'=>$this->produk,'order'=>$this->order,'pelanggan'=>$this->pelanggan]);
+		$this->load->view('index',['last_id'=>$this->last_id,'session'=>$this->my_session,'produk'=>$this->produk,'order'=>$this->order,'pelanggan'=>$this->pelanggan,'msg'=>$this->msg]);
 	}
 	public function reset()
 	{
@@ -93,11 +94,7 @@ class Transaksi extends CI_Controller
 				$this->order[$produk_id]['total']     = $this->order[$produk_id]['qty']*$this->order[$produk_id]['harga'];
 				$this->my_session['order']            = $this->order;
 			}else{
-				echo "
-				<script>
-					alert('jumlah barang tidak mencukupi');
-				</script>
-				";
+				$this->msg = ['alert'=>'danger','msg'=>'jumlah tidak mencukupi'];
 			}
 		}
 		$this->pelanggan = [];

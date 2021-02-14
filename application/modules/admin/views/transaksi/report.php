@@ -19,7 +19,7 @@
 		<div class="panel-heading">
 			<form action="<?= base_url('admin/transaksi/transaksi_report') ?>" method="get" target="_blank" no_load="no_load">
 				<input type="hidden" name="tgl" value="<?= $_GET['tgl'] ?>">
-				<button type="submit" class="btn btn-success">Export Excel</button>
+				<button type="submit" class="btn btn-success"><i class="fa fa-print"></i> cetak</button>
 			</form>
 		</div>
 		<div class="panel-body">

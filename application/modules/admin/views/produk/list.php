@@ -1,6 +1,6 @@
 <?php
 $produk_list = new Zea();
-$produk_list->setHeading('<a href="'.base_url('admin/produk/produk_cetak').'" target="_blank" no_load="no_load" class="btn btn-sm btn-success"><i class="fa fa-file-excel"></i> Cetak</a>');
+$produk_list->setHeading('<a href="'.base_url('admin/produk/produk_cetak').'" target="_blank" no_load="no_load" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Cetak</a>');
 $produk_list->init('roll');
 $produk_list->search();
 $produk_list->setNumbering(true);

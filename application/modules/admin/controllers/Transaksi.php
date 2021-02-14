@@ -93,11 +93,11 @@ class Transaksi extends CI_Controller
 				$this->order[$produk_id]['total']     = $this->order[$produk_id]['qty']*$this->order[$produk_id]['harga'];
 				$this->my_session['order']            = $this->order;
 			}else{
-				?>
+				echo "
 				<script>
 					alert('jumlah barang tidak mencukupi');
 				</script>
-				<?php
+				";
 			}
 		}
 		$this->pelanggan = [];

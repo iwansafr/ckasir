@@ -9,11 +9,14 @@ $form->setLabel('kategori_id','kategori');
 $form->tableOptions('kategori_id','kategori','id','nama');
 $form->addInput('gambar','file');
 $form->setAccept('gambar','.jpg,.jpeg,.png');
-$form->addInput('harga_beli','text');
-$form->setType('harga_beli','number');
-$form->setLabel('harga_beli','harga dasar');
-$form->addInput('harga_jual','text');
-$form->setType('harga_jual','number');
+if(role_is('admin') || role_is('root') || role_is('owner'))
+{
+	$form->addInput('harga_beli','text');
+	$form->setType('harga_beli','number');
+	$form->setLabel('harga_beli','harga dasar');
+	$form->addInput('harga_jual','text');
+	$form->setType('harga_jual','number');
+}
 $form->addInput('stock','text');
 $form->setType('stock','number');
 $form->setAttribute('stock',['min'=>0]);

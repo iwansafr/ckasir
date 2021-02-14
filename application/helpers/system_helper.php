@@ -294,6 +294,19 @@ function is_root()
 	}
 	return $return;
 }
+function role_is($title = '')
+{
+	$return = false;
+	$role   = @$_SESSION[base_url().'_logged_in']['role'];
+	if(!empty($role))
+	{
+		if(strtolower($role)==strtolower($title))
+		{
+			$return = true;
+		}
+	}
+	return $return;
+}
 
 function output_json($array)
 {

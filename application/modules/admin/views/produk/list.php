@@ -1,5 +1,6 @@
 <?php
 $produk_list = new Zea();
+$produk_list->setHeading('<a href="'.base_url('admin/produk/produk_cetak').'" target="_blank" no_load="no_load" class="btn btn-sm btn-success"><i class="fa fa-file-excel"></i> Cetak</a>');
 $produk_list->init('roll');
 $produk_list->search();
 $produk_list->setNumbering(true);
@@ -11,11 +12,14 @@ $produk_list->setAttribute('kategori_id','disabled');
 $produk_list->setLabel('kategori_id','kategori');
 $produk_list->tableOptions('kategori_id','kategori','id','nama');
 $produk_list->addInput('gambar','thumbnail');
-$produk_list->addInput('harga_beli','plaintext');
-$produk_list->setMoney('harga_beli');
-$produk_list->setLabel('harga_beli','harga dasar');
-$produk_list->addInput('harga_jual','plaintext');
-$produk_list->setMoney('harga_jual');
+if(role_is('admin') || role_is('root') || role_is('owner'))
+{
+	$produk_list->addInput('harga_beli','plaintext');
+	$produk_list->setMoney('harga_beli');
+	$produk_list->setLabel('harga_beli','harga dasar');
+	$produk_list->addInput('harga_jual','plaintext');
+	$produk_list->setMoney('harga_jual');
+}
 $produk_list->addInput('stock','plaintext');
 
 $produk_list->addInput('suplier_id','dropdown');

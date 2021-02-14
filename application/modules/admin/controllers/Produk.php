@@ -26,4 +26,9 @@ class Produk extends CI_Controller
 	{
 		$this->load->view('produk/index');
 	}
+	public function produk_cetak()
+	{
+		$data = $this->db->query('SELECT p.*,s.nama AS suplier, k.nama AS kategori FROM produk AS p INNER JOIN suplier AS s ON(p.suplier_id = s.id) INNER JOIN kategori AS k ON(k.id=p.kategori_id) ORDER BY id DESC')->result_array();
+		$this->load->view('produk/produk_cetak',['data'=>$data]);
+	}
 }

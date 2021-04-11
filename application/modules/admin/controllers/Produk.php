@@ -16,6 +16,7 @@ class Produk extends CI_Controller
 
 	public function index()
 	{
+		$this->esg->add_js(['https://unpkg.com/sweetalert/dist/sweetalert.min.js',base_url('assets/js/script.js')]);
 		$this->load->view('index');
 	}
 	public function edit()
@@ -28,7 +29,7 @@ class Produk extends CI_Controller
 	}
 	public function produk_cetak()
 	{
-		$data = $this->db->query('SELECT p.*,s.nama AS suplier, k.nama AS kategori FROM produk AS p INNER JOIN suplier AS s ON(p.suplier_id = s.id) INNER JOIN kategori AS k ON(k.id=p.kategori_id) ORDER BY id DESC')->result_array();
+		$data = $this->db->query('SELECT p.*,s.nama AS suplier, k.nama AS kategori FROM produk AS p LEFT JOIN suplier AS s ON(p.suplier_id = s.id) LEFT JOIN kategori AS k ON(k.id=p.kategori_id) ORDER BY id DESC')->result_array();
 		$this->load->view('produk/produk_cetak',['data'=>$data]);
 	}
 }

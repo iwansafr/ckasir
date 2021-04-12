@@ -29,7 +29,7 @@ $produk_list->tableOptions('suplier_id','suplier','id','nama');
 
 $produk_list->setEdit(true);
 $produk_list->setDelete(true);
-$produk_list->setEditLink('produk/edit/?id=','id');
+$produk_list->setEditLink(base_url('admin/produk/edit/?id='),'id');
 $produk_list->setUrl('admin/produk/clear_list');
 $produk_list->setFormName('produk_list');
 

@@ -170,9 +170,15 @@ class Transaksi extends CI_Controller
 	{
 		$this->load->view('index',['data'=>$this->transaksi_model->last_report()]);
 	}
+	public function last_report_print()
+	{
+		$this->load->view('transaksi/last_report_view',['data'=>$this->transaksi_model->last_report(),'print'=>true]);
+	}
 	public function transaksi_report()
 	{
-		$data = $this->report_data();
-		$this->load->view('transaksi/report_view',['data'=>$data,'print'=>true]);
+		$tgl = $this->input->get('tgl');
+		$tgl = !empty($tgl) ? $tgl : DATE('Y-m-d');
+		$data = $this->report_data($tgl);
+		$this->load->view('transaksi/report_view',['data'=>$data,'print'=>true,'tgl'=>$tgl]);
 	}
 }

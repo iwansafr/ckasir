@@ -155,15 +155,16 @@ class Transaksi extends CI_Controller
 		}
 	}
 
-	private function report_data()
+	private function report_data($tgl)
 	{
-		$tgl = $this->input->get('tgl');
 		return $this->transaksi_model->report_day($tgl);
 	}
 	public function report()
 	{
-		$data = $this->report_data();
-		$this->load->view('index',['data'=>$data]);
+		$tgl = $this->input->get('tgl');
+		$tgl = !empty($tgl) ? $tgl : DATE('Y-m-d');
+		$data = $this->report_data($tgl);
+		$this->load->view('index',['data'=>$data,'tgl'=>$tgl]);
 	}
 	public function transaksi_report()
 	{

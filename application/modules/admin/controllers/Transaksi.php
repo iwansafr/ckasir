@@ -148,6 +148,8 @@ class Transaksi extends CI_Controller
 			}
 			if($this->db->insert_batch('transaksi_detail',$transaksi_detail) && $this->db->update_batch('produk',$update_stock,'id'))
 			{
+				$this->load->model('produk_model');
+				$this->produk_model->batch_update_stock($update_stock);
 				$this->reset();
 			}
 		}

@@ -8,8 +8,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 
-DROP TABLE IF EXISTS `product_stock`;
-CREATE TABLE `product_stock` (
+DROP TABLE IF EXISTS `produk_stock`;
+CREATE TABLE `produk_stock` (
   `id` int(11) NOT NULL,
   `produk_id` int(11) NOT NULL,
   `stock_start` int(11) NOT NULL,
@@ -18,11 +18,11 @@ CREATE TABLE `product_stock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-ALTER TABLE `product_stock`
+ALTER TABLE `produk_stock`
   ADD PRIMARY KEY (`id`);
 
 
-ALTER TABLE `product_stock`
+ALTER TABLE `produk_stock`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

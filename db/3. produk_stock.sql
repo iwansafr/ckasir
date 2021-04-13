@@ -10,12 +10,12 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `produk_stock`;
 CREATE TABLE `produk_stock` (
-  `id` int(11) NOT NULL,
-  `produk_id` int(11) NOT NULL,
-  `stock_start` int(11) NOT NULL,
-  `stock_end` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `produk_id` int NOT NULL,
+  `stock_start` int NOT NULL,
+  `stock_end` int NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ALTER TABLE `produk_stock`
@@ -23,7 +23,7 @@ ALTER TABLE `produk_stock`
 
 
 ALTER TABLE `produk_stock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,6 +8,7 @@ class Produk extends CI_Controller
 		$this->db->cache_off();
 		$this->load->model('esg_model');
 		$this->load->model('admin_model');
+		$this->load->model('produk_model');
 		$this->load->model('admin_menu_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');

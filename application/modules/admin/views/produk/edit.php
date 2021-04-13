@@ -28,3 +28,4 @@ $form->tableOptions('suplier_id','suplier','id','nama');
 $form->setRequired(['nama','kategori_id','harga_beli','harga_jual','stock','suplier_id']);
 $form->setFormName('produk_edit');
 $form->form();
+$this->produk_model->update_stock();

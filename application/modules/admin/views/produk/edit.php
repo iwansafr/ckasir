@@ -17,9 +17,12 @@ if(role_is('admin') || role_is('root') || role_is('owner'))
 	$form->addInput('harga_jual','text');
 	$form->setType('harga_jual','number');
 }
-$form->addInput('stock','text');
-$form->setType('stock','number');
-$form->setAttribute('stock',['min'=>0]);
+if(empty($form->id))
+{
+	$form->addInput('stock','text');
+	$form->setType('stock','number');
+	$form->setAttribute('stock',['min'=>0]);
+}
 
 $form->addInput('suplier_id','dropdown');
 $form->setLabel('suplier_id','suplier');

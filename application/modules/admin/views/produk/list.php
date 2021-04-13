@@ -5,7 +5,11 @@ $produk_list->init('roll');
 $produk_list->search();
 $produk_list->setNumbering(true);
 $produk_list->setTable('produk');
-$produk_list->addInput('id','hidden');
+$produk_list->addInput('id','plaintext');
+$produk_list->setLabel('id','action');
+$produk_list->setPlainText('id',[
+	base_url('admin/produk/update_stock/{id}/update_stock') => 'Update Stok'
+]);
 $produk_list->addInput('nama','plaintext');
 $produk_list->addInput('kategori_id','dropdown');
 $produk_list->setAttribute('kategori_id','disabled');

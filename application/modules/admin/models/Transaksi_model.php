@@ -10,4 +10,9 @@ class Transaksi_model extends CI_Model
 			return $data;
 		}
 	}
+	public function last_report()
+	{
+		$data = $this->db->query('SELECT t.created AS tgl,u.username AS petugas, p.nama AS pelanggan, t.id,t.kode,t.total AS subtotal,d.produk_id,d.nama AS produk,d.qty,d.harga,d.total FROM produk_transaksi AS t INNER JOIN transaksi_detail AS d ON(d.transaksi_id=t.id) INNER JOIN pelanggan AS p ON(p.id=t.pelanggan_id) INNER JOIN user AS u ON(u.id=t.user_id) ORDER BY id DESC LIMIT 20')->result_array();
+		return $data;
+	}
 }

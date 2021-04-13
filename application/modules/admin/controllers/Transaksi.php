@@ -166,6 +166,10 @@ class Transaksi extends CI_Controller
 		$data = $this->report_data($tgl);
 		$this->load->view('index',['data'=>$data,'tgl'=>$tgl]);
 	}
+	public function last_report()
+	{
+		$this->load->view('index',['data'=>$this->transaksi_model->last_report()]);
+	}
 	public function transaksi_report()
 	{
 		$data = $this->report_data();

@@ -1,5 +1,5 @@
 <?php if (!empty($data)): ?>
-<h2>Report Penjualan <?= content_date($_GET['tgl']) ?></h2>
+<h2>Report Penjualan <?= content_date($tgl) ?></h2>
 	<table class="table">
 		<thead>
 			<th>No</th>	

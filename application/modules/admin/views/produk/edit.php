@@ -17,9 +17,12 @@ if(role_is('admin') || role_is('root') || role_is('owner'))
 	$form->addInput('harga_jual','text');
 	$form->setType('harga_jual','number');
 }
-$form->addInput('stock','text');
-$form->setType('stock','number');
-$form->setAttribute('stock',['min'=>0]);
+if(empty($form->id))
+{
+	$form->addInput('stock','text');
+	$form->setType('stock','number');
+	$form->setAttribute('stock',['min'=>0]);
+}
 
 $form->addInput('suplier_id','dropdown');
 $form->setLabel('suplier_id','suplier');
@@ -28,3 +31,5 @@ $form->tableOptions('suplier_id','suplier','id','nama');
 $form->setRequired(['nama','kategori_id','harga_beli','harga_jual','stock','suplier_id']);
 $form->setFormName('produk_edit');
 $form->form();
+$id = !empty($form->insert_id) ? $form->insert_id : $this->input->get('id');
+$this->produk_model->update_stock($id);

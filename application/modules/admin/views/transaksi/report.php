@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<div class="form-group">
 				<label for="tgl">Tgl</label>
-				<input type="date" class="form-control" value="<?= !empty($_GET['tgl']) ? $_GET['tgl'] : '' ?>" name="tgl" required>
+				<input type="date" class="form-control" value="<?= $tgl ?>" name="tgl" required>
 			</div>
 		</div>
 		<div class="panel-footer">
@@ -18,7 +18,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<form action="<?= base_url('admin/transaksi/transaksi_report') ?>" method="get" target="_blank" no_load="no_load">
-				<input type="hidden" name="tgl" value="<?= $_GET['tgl'] ?>">
+				<input type="hidden" name="tgl" value="<?= $tgl; ?>">
 				<button type="submit" class="btn btn-success"><i class="fa fa-print"></i> cetak</button>
 			</form>
 		</div>
